@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<string.h>
+struct book
+{
+	char name[10];
+	int price;
+};
+int main()
+{
+	struct book b1 = { "汇编语言",10 };
+	printf("%s\n%d\n", b1.name, b1.price);
+	struct book* pb = &b1;
+	printf("%p\n", *pb);
+	printf("%p\n", pb);
+	printf("%p\n", &b1);
+	printf("%s\n", b1.name);
+	printf("%s\n", ( * pb).name);
+	printf("%s\n", (b1).name);
+	printf("%s\n", pb->name);
+	strcpy_s(b1.name, "c++");
+	printf("%s",b1. name);
+	return 0;
+}
