@@ -1,0 +1,61 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+int main()
+{
+ int i,j;
+  printf("请输入可能的水仙花瓣数(提示花瓣书为100—999)：");
+  jixu:
+  scanf("%d", &i);
+  if (((i / 100) > 0) && ((i / 100) < 10))
+  {
+   if ((pow((i / 100),3) +pow(((i / 10) % 10),3) +pow((i % 10),3)) == i)
+    //注意：C语言中表示乘方，要么用用户自定义函数，要么库函数记住要与#include<math.h>连用。
+    //不可用"^"来表示，计算机中此符号表示按位异或。
+  
+    printf("该数是水仙花瓣数");
+   else
+    printf("该数不是水仙花瓣数");
+  }
+  else
+  {
+   printf("错误，请重新输入：");
+   goto jixu;
+  }
+ return 0;
+}
+
+
+
+
+
+
+
+
+
+
+//
+//int main()
+//{
+// /*char ch[20] = "jijfdiojs";*/
+// int ch[20] = { 2,4,6 };
+// printf("%d\n", ch + 1);
+// printf("%d", ch);
+// return 0;
+//}
+//int main()
+//{
+// int i = 0;
+// char ch[50];
+// scanf("%s", &ch);
+// printf("%s", ch);
+// //int i = 0, j;
+// //char ch[50]="sjijf";
+// //j = sizeof(ch);
+// //printf("%d\n", j);
+// //j = strlen(ch);
+// //printf("%d", j);
+// return 0;
+//}
