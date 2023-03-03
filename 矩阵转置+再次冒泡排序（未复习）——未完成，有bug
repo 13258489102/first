@@ -1,0 +1,85 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+void fun(int* arr, int i)
+{
+	int l,o,k;
+	for(o=0;0<i-1;o++)
+	for (l = 0; l < i-1; l++)
+	{
+		if (arr[l] > arr[l + 1])
+			k = arr[l+ 1];
+		arr[l + 1] = arr[l];
+		arr[l] = k;
+	}
+	printf("修改后的数组排列是：");
+	for (l = 0; l < i; l++)
+		printf("%d	", arr[l]);
+}
+int main()//再次冒泡排序（未复习）——未完成，有bug
+{
+	int i,k, arr[1000];
+	
+	printf("请输入数组的成员个数（<1000）：");
+	scanf("%d", &i);
+	for (k = 0; k < i; k++) {
+		printf("请输入第%d成员的数字:",k);
+		scanf("%d", &arr[k]);
+	}printf("该数组的初始顺序是:");
+	for(k=0;k<i;k++){
+		printf("%d	", arr[k]);
+	}
+	fun(arr,i);
+	return 0;
+}
+//#include<stdio.h>
+//void fun1(int(*arr)[15], int(*arr1)[15], int n, int m)
+//{
+//	int i, j;
+//	for(i=0;i<n;i++)
+//		for (j = 0; j < m; j++)
+//		{
+//			arr1[j][i] = arr[i][j];
+//		}
+//	printf("新数组是：\n");
+//	for(i=0;i<m;i++)
+//	{
+//		for (j = 0;j< n; j++)
+//		{
+//			printf("%3d", arr1[i][j]);
+//		}
+//		printf("\n");
+//	}
+//}
+//void fun(int arr[15][15], int arr1[15][15], int n, int m)
+//{
+//
+//	int i, j;
+//	printf("请输入：\n");
+//	for(i=0;i<n;i++)
+//		for (j = 0; j < m; j++)
+//		{
+//			printf("第%d行%d列的数字：", i,j);
+//			scanf("%d", &arr[i][j]);
+//		}
+//	printf("原数组是：\n");
+//
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < m; j++)
+//		{
+//	
+//			printf("%3d", arr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	fun1(arr, arr1, n, m);
+//}
+//int main()//矩阵转置
+//{
+//	int n, m;
+//	int arr[15][15], arr1[15][15];
+//	printf("请输入行列的数(<16)：");
+//	scanf("%d%d", &n, &m);
+//	fun(arr, arr1, n, m);
+//	return 0;
+//}
