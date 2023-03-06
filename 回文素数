@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int  fun1(int b[],int h)//判断个位百位数字是否一样。
+{
+	if (b[h] / 10 <= 0)
+		printf("%d\n", b[h]);
+	else if ((b[h] / 100) == (b[h] % 10))
+		printf("%d\n", b[h]);
+	else
+		return 0;
+}
+int fun(int a[],int k)//判断是否为偶数，若奇数继续fun1。
+{
+
+	if ((((a[k] / 10) < 9) && ((a[k] / 10) > 0)) || (((a[k] / 1000) < 9) && ((a[k] / 1000) > 0)))
+		return 0;
+	else
+		fun1(a, k);
+		return 0;
+}
+
+int main()//求回文素数
+{
+	int a=0, b,k, h[1000], q = 0, i;
+	printf("请输入数字(2-1000):\n");
+	scanf("%d", &i);
+	for(b=2;b<i+1;b++)
+	{
+		for (k=1; k < b; k++)
+		{
+			if ((b%k)==0)
+				a+=1;
+			
+		}
+	if (a < 2)
+	{
+		h[q] = b; 
+	q++;
+	 }
+	a = 0;
+	}//判断素数
+	printf("回文素数有:");
+	for (k = 0; k < q; k++)
+	{
+		if (h[k] == 11)
+			printf("%d\n", h[k]);
+		else
+			fun(h,k);
+
+	}
+
+	return 0;
+}
