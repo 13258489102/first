@@ -1,0 +1,63 @@
+class Animal{
+	String name;
+	void read(){
+		System.out.println("睡觉");
+	}
+	class Dog//成员局部内部类
+	{
+		Dog(){
+			System.out.println("成员内部类的构造方法");
+		}
+		void catchMouse(){
+			System.out.println("Don't speak English!");
+		}
+	}
+	public int sleep(){//局部内部类——方法内部.生命周期也仅限于该方法内.
+		class Waste{
+			Waste(){
+			System.out.println("这是局部内部类"+"\t"+"生命周期仅限于此方法内部");
+			}
+		}
+		Waste wa=new Waste();
+		return 0;
+	}
+	//静态内部类
+	static class Discovery{
+		int a=10;
+		void read(){
+		System.out.println("This is a test about"+"\t\t"+"静态内部类！");	
+		}
+	}
+		
+}
+abstract class moment{
+	abstract void see();
+}
+class Example 
+{
+	public static void main(String[] args) 
+	{
+		String name="xiangxiang";
+		Animal an=new Animal();
+		an.read();
+		Animal.Dog dog=an.new Dog();
+		dog.catchMouse();
+		an.sleep();
+		Animal.Discovery di=new Animal.Discovery();
+		di.read();
+//匿名内部类
+////法一
+//		new moment(){
+//			void see(){
+//			System.out.println("I see your monster!");
+//			}
+//		}.see();
+//法二
+		moment a=new moment(){
+			void see(){
+			System.out.println(name+"\t"+"I see your monster!");
+			}
+		};
+		a.see();
+	}
+}
