@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<string.h>
+typedef int ElemType;
+#define MaxSize 10
+typedef struct node
+{
+	ElemType data;
+	struct node *lchild;
+	struct node*rchild;
+}BTNode;
+typedef struct
+{
+	char data[MaxSize];
+	int length;
+}SqString;
+void GetNext(SqString t,int next[])
+{
+		int j,k;
+	j=0,k=-1;
+	next[0]=-1;
+	while(j<t.length-1)
+	{
+		if(k==-1||t.data[j]==t.data[k])
+		{
+			j++;
+			k++;
+			next[j]=k;
+		}
+		else k=next[k];
+	}
+	
+}
+int main()
+{
+	SqString t;
+	char ch[10]="aaababbb";//c语言中，字符串的操作一般有专门的函数，如strcpy，strcmp等，头文件#include<stdio.h> 
+	strcpy(t.data,ch);
+
+	t.length=8;
+	int next[MaxSize];
+	GetNext(t,next);
+	for(int n=0;n<8;n++)
+	{
+		printf("%d\n",next[n]);
+	 } 
+}
