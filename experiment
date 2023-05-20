@@ -1,0 +1,91 @@
+import java.util.Scanner;
+class Bank
+{
+	String bankName="under construction!";
+	String name;
+	String password;
+	float balance=-10;
+	double turnover;
+	int a=1;
+	public void welcome(){
+		System.out.println("欢迎！");
+	}
+	public void Bank(String name,String password,double turnover){
+		this.name=name;
+		this.password=password;
+		this.turnover=turnover;
+	}
+	public void deposit(double turnover){
+		this.turnover=turnover;
+		this.balance+=this.turnover;
+	}
+	public int withdrawal(String password,double turnover){
+
+		if(!(password.equals(this.password))){
+			System.out.print("密码错误！");
+			return 0;
+		}
+		else if(turnover>balance){
+			System.out.println("抱歉您的余额不足！现余额为："+this.balance);
+			return -1;
+		}
+		else{
+			balance-=turnover;
+			return 0;
+		}
+		
+	}
+}
+class Trade{
+	public static void main(String args[]){
+		double turnovera;
+		int i=1;
+		Bank ba=new Bank();
+		Scanner sc=new Scanner(System.in);
+		ba.welcome();
+		System.out.println("请输入用户名：");
+		String na=sc.next();
+		System.out.println("请再次输入密码：");
+		String pa=sc.next();
+		System.out.println("温馨提示：新用户办卡需要扣除10元的手续费哦");
+		System.out.println("请充值：");
+		turnovera=sc.nextDouble();
+		ba.Bank(na,pa,turnovera);
+		System.out.println("恭喜您：开户成功！");
+		
+		while(i==1||i==2||i==3){//循环，可以进行重复的存储，取款，查看余额
+		System.out.println("请输入选项：<1是存款，2是取款，3是查看余额，4是退出！>");
+		i=sc.nextInt();
+
+		if(i==1){
+			System.out.println("请输入存款金额：");
+			double turnover1=sc.nextDouble();
+			ba.balance+=turnover1;
+		}
+		if(i==2){
+			String pa1="";
+			int k=5;
+			double turnover1;
+			while(k>0&&(!pa1.equals(ba.password))){
+			System.out.println("请输入密码：(剩余次数：)"+k);
+			pa1=sc.next();
+			k--;
+			}
+			if(k<=0)
+				System.exit(0);
+			if(pa1.equals(ba.password)){
+				System.out.println("密码输入成功！");
+				System.out.println("请输入取款金额：");
+				turnover1=sc.nextDouble();
+				ba.withdrawal(pa1,turnover1);
+			}
+		}
+		if(i==3){
+			System.out.println(ba.balance);
+		}
+		}
+		if(i==4)
+			System.exit(0);
+	}
+
+}
