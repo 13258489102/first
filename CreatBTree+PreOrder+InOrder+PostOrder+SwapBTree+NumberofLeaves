@@ -1,0 +1,142 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+typedef int ElemType;
+#define MaxSize 25
+
+//1. 编写程序，建立一棵二叉树（以链表存储），对该二叉树进行遍历并输出该二叉树的前序，中序，后序遍历序列；
+//2. 编写程序，建立一棵二叉树（以链表存储），实现二叉树左右子树的交换；
+//3. 统计二叉树中叶子结点个数。
+
+typedef struct node
+{
+	char data;
+	struct node*lchild,*rchild;	
+}BTNode;
+void CreatBTree(BTNode *&b,char* ch)
+{
+	char c=ch[0];
+	int k=1;
+	BTNode *p;
+	BTNode *St[MaxSize];
+	int top=-1;
+	int j=0;
+	while(c!='\0')
+	{
+		
+		switch(c)
+		{
+			case '(':top++;St[top]=p;k=1;break;
+			case ')':top--;break;
+			case ',':k=2;break;
+			default:
+				p=(BTNode*)malloc(sizeof(BTNode));
+				p->data=c;
+				p->lchild=p->rchild=NULL;
+				if(b==NULL)
+				b=p;
+				else
+				{
+					
+					switch(k)
+					{
+						case 1:St[top]->lchild=p;
+						break;
+						case 2:St[top]->rchild=p;
+						break;
+					}
+						
+				}
+			
+					
+		}
+		j++;
+		c=ch[j];
+	}	
+}
+//先序遍历
+void PreOrder(BTNode*b)
+{
+	if(b!=NULL)
+	{
+	printf("%c",b->data);
+	PreOrder(b->lchild);
+	PreOrder(b->rchild);	
+	}
+} 
+//中序遍历 
+void InOrder(BTNode*b)
+{
+	if(b!=NULL)
+	{
+		InOrder(b->lchild);
+		printf("%c",b->data);
+		InOrder(b->rchild);
+	}
+}
+// 后序遍历 
+void PostOrder(BTNode*b)
+{
+	if(b!=NULL)
+	{
+		PostOrder(b->lchild);
+		PostOrder(b->rchild);
+		printf("%c",b->data);
+	}
+}
+//左右子树的交换
+int SwapBTree(BTNode*b)
+{
+	BTNode* tmp;
+	if(b==NULL)
+	return 0;
+	if(b->lchild==NULL&&b->rchild==NULL)
+	return 0;
+	else	
+	{
+		SwapBTree(b->lchild);
+		SwapBTree(b->rchild);
+		tmp=b->lchild;
+		b->lchild=b->rchild;
+		b->rchild=tmp;
+	}
+}
+//统计二叉树中叶子结点个数。	
+int NumberofLeaves(BTNode*&b)
+{
+	int count=0;
+	if(b!=NULL)
+	{
+		if(b->lchild==NULL&&b->rchild==NULL)
+		count++;
+		else
+		{
+			count=NumberofLeaves(b->lchild)+NumberofLeaves(b->rchild);
+		}
+	}
+	return count;
+}		
+
+int main()
+{
+	char ch[]="A(B(D(,G)),C(E,F))";
+	BTNode *b=NULL;
+	CreatBTree(b,ch);
+	PreOrder(b);
+	printf("\n");
+	InOrder(b);
+	printf("\n");
+	PostOrder(b);
+	printf("\n");
+	
+	SwapBTree(b);
+	PreOrder(b);
+	printf("\n");
+	InOrder(b);
+	printf("\n");
+	PostOrder(b);
+	printf("\n");
+	
+	printf("%d",NumberofLeaves(b));
+	return 0;
+}
