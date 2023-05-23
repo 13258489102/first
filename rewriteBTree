@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+#define M 20
+typedef int TypeNode;
+typedef struct BTnode
+{
+	int data;
+	struct BTnode*lchild,*rchild;
+}BTNode;
+
+void CreatBTree(BTNode*&b,char *arr)
+{
+	int j=0,k=1,top=-1;
+	char ch=arr[0];
+	BTNode*St[M],*p;
+	while(ch!='\0')
+	{
+		switch(ch)
+		{
+			case '(':top++;St[top]=p;k=1;break;
+			case ')':top--;break;
+			case ',':k=2;break;
+			default:p=(BTNode*)malloc(sizeof(BTNode));
+			p->data=ch;
+			p->lchild=p->rchild=NULL;
+			if(b==NULL)
+			b=p;
+			else
+			{
+				switch(k)
+				{
+					case 1:St[top]->lchild=p;break;
+					case 2:St[top]->rchild=p;break;
+				}
+			}
+		}
+		j++;
+		ch=arr[j];
+	}
+}
+void InOrder(BTNode*b)
+{
+	if(b!=NULL)
+	{
+		InOrder(b->lchild);
+		printf("%c",b->data);
+		InOrder(b->rchild);
+	}
+}
+void Destory(BTNode*b)
+{
+	if(b!=NULL)
+	{
+		Destory(b->lchild);
+		Destory(b->rchild);
+		free(b);
+	}
+}
+int main()
+{
+	char ch[]="A(B(D(,G)),C(E,F))";
+	BTNode*b=NULL;
+	CreatBTree(b,ch);
+	InOrder(b);
+	Destory(b);
+	return 0;
+}
