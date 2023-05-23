@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define M 10
+#define INF 27678
+typedef int InfoType;
+typedef struct Arcnode
+{
+	int adjvex;
+	struct Arcnode*nextarc;
+	int weight; 
+}ArcNode;
+typedef struct Vnode
+{
+	InfoType info;
+	ArcNode*firstarc;
+}VNode;
+typedef struct
+{
+	VNode adjlist[M];
+	int n,e;	
+}ArcGraph;
+CreatGraph(ArcGraph*&G,int arr[M][M],int n,int e)
+{
+	ArcNode*p;
+	int i,j;
+	G=(ArcGraph*)malloc(sizeof(ArcGraph));
+	for(i=0;i<n;i++)
+	G->adjlist[i].firstarc=NULL;
+	for(i=0;i<n;i++)
+	for(j=n-1;j>=0;j--)
+	{
+		if(arr[i][j]!=0&&arr[i][j]!=INF)
+		{
+		p=(ArcNode*)malloc(sizeof(ArcNode));
+		p->adjvex=j;
+		p->weight=arr[i][j];
+		p->nextarc=G->adjlist[i].firstarc;
+		G->adjlist[i].firstarc=p;
+		}
+		G->n=n;G->e=e;
+	}
+	
+ } 
+ void DispAdj(ArcGraph*G)
+ {
+ 	int i;ArcNode*p;
+ 	for(i=0;i<(G->n);i++)
+ 	{
+ 		p=G->adjlist[i].firstarc;
+ 		printf("%3d:",i);
+ 		while(p!=NULL)
+ 		{
+ 			printf("%3d[%d]",p->adjvex,p->weight);
+ 			p=p->nextarc;
+		 }
+		 printf("^\n");
+	 }
+ 	
+ }
+int main()
+{
+	ArcGraph*G;
+	int arr[][M]=
+	{{0,8,27678,5,27678},
+	{27678,0,3,27678,27678},
+	{27678,27678,0,27678,6},
+	{27678,27678,9,0,27678},
+	{27678,27678,27678,27678,0}};
+	CreatGraph(G,arr,5,5);
+
+	DispAdj(G);
+	return 0;
+}
